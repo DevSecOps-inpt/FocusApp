@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FocusLock</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">Welcome to FocusLock</string>
+    <string name="welcome_subtitle">Block distracting apps and stay focused</string>
+    <string name="permission_usage_title">Usage Access Permission</string>
+    <string name="permission_usage_description">Required to monitor app usage and block apps</string>
+    <string name="permission_overlay_title">Display Over Other Apps</string>
+    <string name="permission_overlay_description">Required to show lock screen when blocked apps are opened</string>
+    <string name="permission_accessibility_title">Accessibility Service</string>
+    <string name="permission_accessibility_description">Backup method for app detection on some devices</string>
+    <string name="permission_battery_title">Battery Optimization</string>
+    <string name="permission_battery_description">Prevent the system from stopping FocusLock</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_blocked_apps">Blocked Apps</string>
+    <string name="nav_focus">Focus</string>
+    <string name="nav_history">History</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Buttons -->
+    <string name="btn_grant_permission">Grant Permission</string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_skip">Skip</string>
+    <string name="btn_done">Done</string>
+    <string name="btn_unlock">Unlock</string>
+    <string name="btn_close_app">Close App</string>
+    <string name="btn_start_focus">Start Focus</string>
+    <string name="btn_end_focus">End Focus</string>
+    
+    <!-- Focus Mode -->
+    <string name="focus_quick_title">Quick Focus</string>
+    <string name="focus_scheduled_title">Scheduled Focus</string>
+    <string name="focus_duration_15min">15 minutes</string>
+    <string name="focus_duration_30min">30 minutes</string>
+    <string name="focus_duration_1hour">1 hour</string>
+    <string name="focus_duration_custom">Custom</string>
+    
+    <!-- Lock Screen -->
+    <string name="lock_title">App Blocked</string>
+    <string name="lock_message">This app is currently blocked. Unlock to continue.</string>
+    
+    <!-- Notifications -->
+    <string name="notification_channel_enforcement">App Enforcement</string>
+    <string name="notification_channel_enforcement_desc">Notifications for active focus sessions</string>
+    <string name="notification_focus_active">Focus mode active</string>
+    <string name="notification_vpn_active">Internet blocking active</string>
+    
+    <!-- Errors -->
+    <string name="error_permission_denied">Permission denied</string>
+    <string name="error_authentication_failed">Authentication failed</string>
+    <string name="error_generic">Something went wrong</string>
+</resources> 

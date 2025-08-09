@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Exclude sensitive data from backup -->
+    <exclude domain="database" path="focuslock_database" />
+    <exclude domain="database" path="focuslock_database_debug" />
+    <exclude domain="sharedpref" path="focuslock_secure_prefs.xml" />
+</full-backup-content> 
