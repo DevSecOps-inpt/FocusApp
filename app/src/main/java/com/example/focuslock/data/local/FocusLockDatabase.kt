@@ -1,4 +1,4 @@
-package com.example.focuslock.data.local
+package com.devsecopsinpt.focusapp.data.local
 
 import androidx.room.Database
 import androidx.room.Room
@@ -6,8 +6,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import android.content.Context
-import com.example.focuslock.data.local.dao.*
-import com.example.focuslock.data.local.entity.*
+import com.devsecopsinpt.focusapp.data.local.dao.*
+import com.devsecopsinpt.focusapp.data.local.entity.*
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 

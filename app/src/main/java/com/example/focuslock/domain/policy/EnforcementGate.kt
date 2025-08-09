@@ -1,4 +1,4 @@
-package com.example.focuslock.domain.policy
+package com.devsecopsinpt.focusapp.domain.policy
 
 interface EnforcementGate {
     fun isActive(): Boolean

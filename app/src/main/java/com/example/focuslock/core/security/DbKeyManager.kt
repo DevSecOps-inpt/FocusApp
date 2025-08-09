@@ -1,4 +1,4 @@
-package com.example.focuslock.core.security
+package com.devsecopsinpt.focusapp.core.security
 
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec

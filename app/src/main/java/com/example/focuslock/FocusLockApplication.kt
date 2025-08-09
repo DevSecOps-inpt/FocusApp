@@ -1,4 +1,4 @@
-package com.example.focuslock
+package com.devsecopsinpt.focusapp
 
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory

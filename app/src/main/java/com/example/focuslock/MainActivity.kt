@@ -1,4 +1,4 @@
-package com.example.focuslock
+package com.devsecopsinpt.focusapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

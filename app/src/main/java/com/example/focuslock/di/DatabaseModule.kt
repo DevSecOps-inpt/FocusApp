@@ -1,10 +1,10 @@
-package com.example.focuslock.di
+package com.devsecopsinpt.focusapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.focuslock.core.security.DbKeyManager
-import com.example.focuslock.data.local.FocusLockDatabase
-import com.example.focuslock.data.local.dao.*
+import com.devsecopsinpt.focusapp.core.security.DbKeyManager
+import com.devsecopsinpt.focusapp.data.local.FocusLockDatabase
+import com.devsecopsinpt.focusapp.data.local.dao.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

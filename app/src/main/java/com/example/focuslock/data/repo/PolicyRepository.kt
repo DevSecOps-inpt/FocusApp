@@ -1,7 +1,7 @@
-package com.example.focuslock.data.repo
+package com.devsecopsinpt.focusapp.data.repo
 
-import com.example.focuslock.data.local.dao.BlockedAppDao
-import com.example.focuslock.data.local.dao.FocusSessionDao
+import com.devsecopsinpt.focusapp.data.local.dao.BlockedAppDao
+import com.devsecopsinpt.focusapp.data.local.dao.FocusSessionDao
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
