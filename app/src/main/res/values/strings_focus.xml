@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Enforcement Service -->
+    <string name="notification_channel_enforcement">Focus Enforcement</string>
+    <string name="notification_channel_enforcement_desc">Shows when focus mode is active</string>
+    <string name="notification_focus_active">Focus mode is active</string>
+    
+    <!-- VPN Service -->
+    <string name="notif_vpn_active">Focus VPN is blocking internet access</string>
+    
+    <!-- Lock Overlay -->
+    <string name="lock_message">This app is blocked during focus time</string>
+    <string name="btn_unlock">Unlock</string>
+    <string name="btn_close_app">Close App</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_desc">Detects app launches as backup to Usage Stats</string>
+    <string name="permission_accessibility_description">FocusLock uses accessibility service to detect app launches when Usage Stats permission is not available</string>
+</resources>

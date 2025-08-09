@@ -2,7 +2,7 @@ package com.example.focuslock.services.accessibility
 
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
-import com.example.focuslock.services.focus.EnforcementGate
+import com.example.focuslock.domain.policy.EnforcementGateRegistry
 
 class FocusAccessibilityService : AccessibilityService() {
     
@@ -21,7 +21,7 @@ class FocusAccessibilityService : AccessibilityService() {
         if (packageName == this.packageName) return
         
         // Report to enforcement gate
-        EnforcementGate.instance?.onForeground(packageName)
+        EnforcementGateRegistry.current?.onForeground(packageName)
     }
     
     override fun onInterrupt() {

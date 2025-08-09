@@ -1,7 +1,8 @@
 package com.example.focuslock.di
 
 import android.content.Context
-import com.example.focuslock.core.security.SecurityManager
+import androidx.room.Room
+import com.example.focuslock.core.security.DbKeyManager
 import com.example.focuslock.data.local.FocusLockDatabase
 import com.example.focuslock.data.local.dao.*
 import dagger.Module
@@ -9,6 +10,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import javax.inject.Singleton
 
 @Module
@@ -19,15 +22,14 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context,
-        securityManager: SecurityManager
+        dbKeyManager: DbKeyManager
     ): FocusLockDatabase {
-        return try {
-            val passphrase = securityManager.getDatabasePassphrase()
-            FocusLockDatabase.buildDatabase(context, passphrase)
-        } catch (e: Exception) {
-            // Fallback to debug database if encryption fails
-            FocusLockDatabase.buildDatabaseDebug(context)
-        }
+        val passphrase = SQLiteDatabase.getBytes(dbKeyManager.getOrCreateKey())
+        val factory = SupportFactory(passphrase)
+        return Room.databaseBuilder(context, FocusLockDatabase::class.java, "focuslock.db")
+            .openHelperFactory(factory)
+            .fallbackToDestructiveMigration()
+            .build()
     }
     
     @Provides

@@ -23,6 +23,10 @@ import androidx.lifecycle.lifecycleScope
 import com.example.focuslock.R
 import com.example.focuslock.core.auth.AuthHelper
 import com.example.focuslock.core.security.SecurityManager
+import com.example.focuslock.core.security.UnlockAuth
+import com.example.focuslock.data.repo.AttemptLogger
+import com.example.focuslock.services.focus.EnforcementGateImpl
+import com.example.focuslock.services.focus.EnforcementService
 import com.example.focuslock.ui.theme.FocusLockTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,50 +36,42 @@ import javax.inject.Inject
 class LockOverlayActivity : ComponentActivity() {
     
     @Inject
-    lateinit var securityManager: SecurityManager
+    lateinit var unlockAuth: UnlockAuth
     
     @Inject
-    lateinit var enforcementGate: com.example.focuslock.services.focus.EnforcementGateImpl
+    lateinit var attemptLogger: AttemptLogger
     
-    private lateinit var authHelper: AuthHelper
     private var blockedPackage: String? = null
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        authHelper = AuthHelper(this)
         blockedPackage = intent.getStringExtra("pkg")
         
         setContent {
             FocusLockTheme {
                 LockOverlayScreen(
                     packageName = blockedPackage ?: "",
-                    onUnlock = { attemptUnlock() },
+                    onUnlock = { unlockMinutes -> attemptUnlock(unlockMinutes) },
                     onCloseApp = { closeApp() }
                 )
             }
         }
     }
     
-    private fun attemptUnlock() {
+    private fun attemptUnlock(unlockMinutes: Int) {
         lifecycleScope.launch {
-            val success = if (securityManager.isBiometricEnabled() && authHelper.isBiometricAvailable()) {
-                authHelper.authenticate()
-            } else if (securityManager.isPinSet()) {
-                // For now, show PIN dialog would be implemented here
-                // For simplicity, using biometric/device credential
-                authHelper.authenticate()
-            } else {
-                // No security set up, allow unlock
-                true
-            }
+            val success = unlockAuth.authenticate(this@LockOverlayActivity)
             
-            if (success) {
-                // Grant temporary bypass for this app
-                blockedPackage?.let { pkg ->
-                    enforcementGate.grantTemporaryBypass(pkg)
+            blockedPackage?.let { pkg ->
+                attemptLogger.logAttempt(pkg, success = success, sessionId = null)
+                
+                if (success) {
+                    // Grant temporary bypass for this app
+                    val enforcementService = EnforcementService()
+                    enforcementService.grantBypass(pkg, unlockMinutes)
+                    finish()
                 }
-                finish()
             }
         }
     }
@@ -106,7 +102,7 @@ class LockOverlayActivity : ComponentActivity() {
 @Composable
 fun LockOverlayScreen(
     packageName: String,
-    onUnlock: () -> Unit,
+    onUnlock: (Int) -> Unit,
     onCloseApp: () -> Unit
 ) {
     val context = LocalContext.current
@@ -164,9 +160,33 @@ fun LockOverlayScreen(
             
             Spacer(modifier = Modifier.height(32.dp))
             
+            // Duration selection
+            var selectedDuration by remember { mutableStateOf(5) }
+            Text(
+                text = "Unlock for:",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            
+            Spacer(modifier = Modifier.height(8.dp))
+            
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                listOf(1, 5, 15).forEach { minutes ->
+                    FilterChip(
+                        onClick = { selectedDuration = minutes },
+                        label = { Text("${minutes}m") },
+                        selected = selectedDuration == minutes
+                    )
+                }
+            }
+            
+            Spacer(modifier = Modifier.height(24.dp))
+            
             // Unlock button
             Button(
-                onClick = onUnlock,
+                onClick = { onUnlock(selectedDuration) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
