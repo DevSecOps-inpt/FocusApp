@@ -52,6 +52,11 @@ android {
         compose = true
     }
     
+    // Kotlin 2.0 + Compose plugin supports omitting this, but keeping it aligned is fine
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"
+    }
+    
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -104,9 +109,9 @@ dependencies {
     // Security/Encryption
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
     
-    // SQLCipher for encrypted database
-    implementation("net.zetetic:android-database-sqlcipher:4.5.4")
-    implementation("com.github.commonsguy:cwac-saferoom:1.5.4")
+    // SQLCipher for encrypted database (direct)
+    implementation("net.zetetic:sqlcipher-android:4.5.4")
+    implementation("androidx.sqlite:sqlite:2.4.0")
     
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
