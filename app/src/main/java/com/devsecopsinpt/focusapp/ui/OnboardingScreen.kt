@@ -13,6 +13,7 @@ import com.devsecopsinpt.focusapp.hasUsageAccess
 import com.devsecopsinpt.focusapp.openOverlaySettings
 import com.devsecopsinpt.focusapp.openUsageAccessSettings
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(onDone: () -> Unit) {
     val ctx = LocalContext.current

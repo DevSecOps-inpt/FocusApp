@@ -86,8 +86,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
     
     // Hilt with KSP
-    implementation("com.google.dagger:hilt-android:2.51")
-    ksp("com.google.dagger:hilt-compiler:2.51")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
     ksp("androidx.hilt:hilt-compiler:1.2.0")
@@ -108,7 +108,7 @@ dependencies {
     
     // Security/Encryption
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
-    
+
     // Material Components (required for M3 themes even with Compose)
     implementation("com.google.android.material:material:1.12.0")
 
