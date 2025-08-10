@@ -109,6 +109,9 @@ dependencies {
     // Security/Encryption
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
     
+    // Material Components (required for M3 themes even with Compose)
+    implementation("com.google.android.material:material:1.12.0")
+
     // SQLCipher for encrypted database (direct)
     implementation("net.zetetic:sqlcipher-android:4.5.4")
     implementation("androidx.sqlite:sqlite:2.4.0")

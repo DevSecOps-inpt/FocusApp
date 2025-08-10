@@ -31,6 +31,12 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
+    <!-- New simple Material3 app theme for Compose -->
+    <style name="Theme.FocusApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+    </style>
+
     <!-- Overlay theme for lock screen -->
     <style name="Theme.FocusLock.Overlay" parent="Theme.FocusLock">
         <item name="android:windowIsTranslucent">false</item>
@@ -41,4 +47,4 @@
         <item name="android:navigationBarColor">@color/md_theme_light_surface</item>
         <item name="android:windowShowWallpaper">false</item>
     </style>
-</resources> 
+</resources>
