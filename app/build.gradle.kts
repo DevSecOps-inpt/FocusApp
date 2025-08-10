@@ -16,6 +16,14 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
+        
+            // NDK version for 16KB page size compliance
+    ndkVersion = "26.1.10909125"
+    
+    // Additional 16KB compliance optimizations
+    ndk {
+        debugSymbolLevel = "FULL"
+    }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -60,6 +68,12 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+                // Optimize for 16KB page size compliance
+    jniLibs {
+        useLegacyPackaging = false
+        // Ensure proper alignment for 16KB pages
+        pickFirsts += "**/libsqlcipher.so"
+    }
         }
     }
 }
@@ -112,8 +126,8 @@ dependencies {
     // Material Components (required for M3 themes even with Compose)
     implementation("com.google.android.material:material:1.12.0")
 
-    // SQLCipher for encrypted database (direct)
-    implementation("net.zetetic:sqlcipher-android:4.5.4")
+    // SQLCipher for encrypted database (latest for 16KB compliance)
+    implementation("net.zetetic:sqlcipher-android:4.6.1")
     implementation("androidx.sqlite:sqlite:2.4.0")
     
     // Coroutines
