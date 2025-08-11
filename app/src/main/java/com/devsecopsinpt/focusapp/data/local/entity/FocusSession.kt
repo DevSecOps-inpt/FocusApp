@@ -10,6 +10,8 @@ data class FocusSession(
     val mode: FocusMode, // QUICK or SCHEDULED
     val startTime: Long,
     val endTime: Long?,
+    val targetMinutes: Int = 25, // Default 25 minutes
+    val completed: Boolean = false, // Whether session completed successfully
     val whitelist: List<String> = emptyList(), // package names
     val vpnEnabled: Boolean = false,
     val scheduleId: Long? = null // if scheduled

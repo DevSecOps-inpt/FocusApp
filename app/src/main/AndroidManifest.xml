@@ -19,6 +19,14 @@
     <!-- Query installed packages -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission"/>
 
+    <!-- So we can list launcher apps without QUERY_ALL_PACKAGES -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:name=".FocusApp"
         android:allowBackup="true"
@@ -57,6 +65,12 @@
         <!-- Enforcement service -->
         <service
             android:name=".services.focus.EnforcementService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
+
+        <!-- Focus session service -->
+        <service
+            android:name=".services.FocusSessionService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
 

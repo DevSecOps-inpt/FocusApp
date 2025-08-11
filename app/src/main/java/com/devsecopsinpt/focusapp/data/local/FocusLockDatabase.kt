@@ -8,12 +8,12 @@ import com.devsecopsinpt.focusapp.data.local.entity.*
 
 @Database(
     entities = [
-        BlockedApp::class,
+        BlockedAppEntity::class,
         FocusSession::class,
         BlockedAttempt::class,
         Schedule::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

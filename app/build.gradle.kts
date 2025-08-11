@@ -71,8 +71,6 @@ android {
                 // Optimize for 16KB page size compliance
     jniLibs {
         useLegacyPackaging = false
-        // Ensure proper alignment for 16KB pages
-        pickFirsts += "**/libsqlcipher.so"
     }
         }
     }
@@ -126,9 +124,8 @@ dependencies {
     // Material Components (required for M3 themes even with Compose)
     implementation("com.google.android.material:material:1.12.0")
 
-    // SQLCipher for encrypted database (latest for 16KB compliance)
-    implementation("net.zetetic:sqlcipher-android:4.6.1")
-    implementation("androidx.sqlite:sqlite:2.4.0")
+    // Hardware-backed encryption via Android Keystore (replaces SQLCipher)
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
     
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")

@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.devsecopsinpt.focusapp.data.local.FocusLockDatabase
 import com.devsecopsinpt.focusapp.data.local.dao.*
+import com.devsecopsinpt.focusapp.crypto.CryptoStore
+import com.devsecopsinpt.focusapp.data.repository.BlockedAppRepository
+import com.devsecopsinpt.focusapp.data.local.migrations.MIGRATION_1_2
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,9 +20,13 @@ object DatabaseModule {
 
     @Provides
     @Singleton
+    fun provideCryptoStore(@ApplicationContext ctx: Context): CryptoStore = CryptoStore(ctx)
+
+    @Provides
+    @Singleton
     fun provideDatabase(@ApplicationContext ctx: Context): FocusLockDatabase =
         Room.databaseBuilder(ctx, FocusLockDatabase::class.java, "focus_lock.db")
-            .fallbackToDestructiveMigration()
+            .addMigrations(MIGRATION_1_2)
             .build()
 
     @Provides
@@ -33,4 +40,11 @@ object DatabaseModule {
     
     @Provides
     fun provideScheduleDao(db: FocusLockDatabase): ScheduleDao = db.scheduleDao()
+
+    @Provides
+    @Singleton
+    fun provideBlockedAppRepository(
+        dao: BlockedAppDao,
+        crypto: CryptoStore
+    ): BlockedAppRepository = BlockedAppRepository(dao, crypto)
 }

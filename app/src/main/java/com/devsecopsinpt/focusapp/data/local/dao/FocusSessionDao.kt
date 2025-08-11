@@ -11,6 +11,9 @@ interface FocusSessionDao {
     @Query("SELECT * FROM focus_sessions ORDER BY startTime DESC")
     fun observeAll(): Flow<List<FocusSession>>
     
+    @Query("SELECT * FROM focus_sessions ORDER BY startTime DESC")
+    fun sessions(): Flow<List<FocusSession>> // Alias for observeAll() for compatibility
+    
     @Query("SELECT * FROM focus_sessions WHERE endTime IS NULL")
     fun observeActiveSessions(): Flow<List<FocusSession>>
     
